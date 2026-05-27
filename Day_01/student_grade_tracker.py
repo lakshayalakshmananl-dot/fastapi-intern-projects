@@ -22,8 +22,9 @@ def get_average():
         print("No students available")
         return
 
-    total = sum(students.values())
-    average = total / len(students)
+    grades = [grade for grade in students.values()]
+
+    average = sum(grades) / len(grades)
 
     print("Average Grade:", average)
 
@@ -34,10 +35,28 @@ def list_students():
         print("No students available")
 
     else:
+
+        student_list = [
+            f"{name} : {grade}"
+            for name, grade in students.items()
+        ]
+
         print("\nStudent Records:")
 
-        for name, grade in students.items():
-            print(name, ":", grade)
+        for student in student_list:
+            print(student)
+
+
+def passed_students():
+
+    passed = {
+        name: grade
+        for name, grade in students.items()
+        if grade >= 40
+    }
+
+    print("\nPassed Students:")
+    print(passed)
 
 
 while True:
@@ -47,7 +66,8 @@ while True:
     print("2. Update Grade")
     print("3. Get Average")
     print("4. List All Students")
-    print("5. Exit")
+    print("5. Show Passed Students")
+    print("6. Exit")
 
     choice = input("Enter your choice: ")
 
@@ -75,9 +95,12 @@ while True:
 
     elif choice == "5":
 
+        passed_students()
+
+    elif choice == "6":
+
         print("Exiting program...")
         break
 
     else:
         print("Invalid choice")
-        
